@@ -27,6 +27,8 @@ jobs:
       name: Build      
       run: dotnet build --no-restore
 
+      run: ls -la 
+      
     - id: test
       name: Test
       run: dotnet test "PluralsightApi.Tests/PluralsightApi.Tests.csproj" --collect "XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
