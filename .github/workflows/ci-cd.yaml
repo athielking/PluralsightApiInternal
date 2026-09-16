@@ -27,7 +27,7 @@ jobs:
       name: Build      
       run: dotnet build --no-restore
 
-    - run: ls -la 
+    - run: ls PluralsightApi.Web 
 
     - id: test
       name: Test
