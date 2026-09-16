@@ -23,6 +23,8 @@ jobs:
     - id: build
       name: Build      
       run: dotnet build --no-restore
+    
+      run: ls -la
 
     - id: test
       name: Test
