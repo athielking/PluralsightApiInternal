@@ -61,6 +61,7 @@ jobs:
         name: dotnet-webapp
         path: app.zip
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     
     steps:
