@@ -69,3 +69,9 @@ jobs:
       uses: actions/download-artifact@v8
       with:
         name: dotnet-webapp
+    
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: pluralsight-api
+        package: app.zip  
