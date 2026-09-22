@@ -64,6 +64,14 @@ jobs:
     if: ${{ github.ref_name == 'main' }}
     needs: build
     runs-on: ubuntu-latest
+
+    strategy:
+      max-parallel: 1
+      matrix: 
+        environment: [Dev, Prod]
+    
+    environment:
+      name: ${{ matrix.environment }}
     
     steps:
     - name: Dump GitHub context
