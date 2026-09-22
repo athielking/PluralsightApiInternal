@@ -61,6 +61,7 @@ jobs:
         name: dotnet-webapp
         path: app.zip
   deploy:
+    if: ${{ github.ref_name == 'main' }}
     needs: build
     runs-on: ubuntu-latest
     
@@ -69,7 +70,7 @@ jobs:
       env:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
-      
+
     - name: Download Artifact
       uses: actions/download-artifact@v8
       with:
