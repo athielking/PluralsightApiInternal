@@ -65,6 +65,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+      
     - name: Download Artifact
       uses: actions/download-artifact@v8
       with:
@@ -74,7 +79,7 @@ jobs:
       uses: azure/login@v3
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
+
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with:
