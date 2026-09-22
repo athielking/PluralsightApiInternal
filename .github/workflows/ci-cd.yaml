@@ -69,7 +69,12 @@ jobs:
       uses: actions/download-artifact@v8
       with:
         name: dotnet-webapp
-    
+
+    - name: Azure Login
+      uses: azure/login@v3
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
     - name: Deploy to Azure
       uses: azure/webapps-deploy@v2
       with:
