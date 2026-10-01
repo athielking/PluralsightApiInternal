@@ -31,14 +31,14 @@ test:
     reports:
       coverage_report:
         coverage_format: cobertura
-        path: Pluralsight.Tests/TestResults/*/coverage.cobertura.xml
+        path: PluralsightApi.Tests/TestResults/*/coverage.cobertura.xml
 
 package:
   before_script:
     - apt-get update
     - apt-get install -y zip unzip
   stage: package
-  image: mcr.microsoft.com/dotnet/sdk:8.0-noble
+  image: mcr.microsoft.com/dotnet/sdk:10.0-noble
   dependencies:
     - build
   script:
