@@ -63,21 +63,24 @@ stages:
   jobs:
   - deployment: DeployToAzure
     displayName: Deploy to Dev Azure App Service
-    environment: Dev
+    environment: Dev    
     pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: DownloadBuildArtifacts@0
-      inputs:
-        artifactName: 'dotnet-webapp'
-        downloadPath: '$(Pipeline.Workspace)'
+      vmImage: 'ubuntu-latest'    
+    strategy:
+      runOnce:
+        deploy:        
+          steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              artifactName: 'dotnet-webapp'
+              downloadPath: '$(Pipeline.Workspace)'
 
-    - task: AzureWebApp@1
-      inputs:
-        azureSubscription: pluralsightConnection
-        appType: 'webAppLinux'
-        appName: '$(appService)'
-        package: '$(Pipeline.Workspace)/dotnet-webapp/app.zip'
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: pluralsightConnection
+              appType: 'webAppLinux'
+              appName: '$(appService)'
+              package: '$(Pipeline.Workspace)/dotnet-webapp/app.zip'
 
 - stage: DeployProd
   displayName: Deploy to Azure Prod
@@ -91,15 +94,18 @@ stages:
     environment: Prod
     pool:
       vmImage: 'ubuntu-latest'
-    steps:
-    - task: DownloadBuildArtifacts@0
-      inputs:
-        artifactName: 'dotnet-webapp'
-        downloadPath: '$(Pipeline.Workspace)'
+    strategy:
+      run-once:
+        deploy:         
+          steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              artifactName: 'dotnet-webapp'
+              downloadPath: '$(Pipeline.Workspace)'
 
-    - task: AzureWebApp@1
-      inputs:
-        azureSubscription: pluralsightConnection
-        appType: 'webAppLinux'
-        appName: '$(appService)'
-        package: '$(Pipeline.Workspace)/dotnet-webapp/app.zip'
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: pluralsightConnection
+              appType: 'webAppLinux'
+              appName: '$(appService)'
+              package: '$(Pipeline.Workspace)/dotnet-webapp/app.zip'
