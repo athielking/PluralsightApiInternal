@@ -95,7 +95,7 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     strategy:
-      run-once:
+      runOnce:
         deploy:         
           steps:
           - task: DownloadBuildArtifacts@0
