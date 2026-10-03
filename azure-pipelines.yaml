@@ -70,17 +70,16 @@ stages:
       runOnce:
         deploy:        
           steps:
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              artifactName: 'dotnet-webapp'
-              downloadPath: '$(Pipeline.Workspace)'
-
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: pluralsightConnection
-              appType: 'webAppLinux'
-              appName: '$(appService)'
-              package: '$(Pipeline.Workspace)/dotnet-webapp/app.zip'
+            - task: DownloadBuildArtifacts@0
+              inputs:
+                artifactName: 'dotnet-webapp'
+                downloadPath: '$(Pipeline.Workspace)'
+            - task: AzureWebApp@1
+              inputs:
+                azureSubscription: pluralsightConnection
+                appType: 'webAppLinux'
+                appName: '$(appService)'
+                package: '$(Pipeline.Workspace)/dotnet-webapp/app.zip'
 
 - stage: DeployProd
   displayName: Deploy to Azure Prod
@@ -98,14 +97,14 @@ stages:
       runOnce:
         deploy:         
           steps:
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              artifactName: 'dotnet-webapp'
-              downloadPath: '$(Pipeline.Workspace)'
+            - task: DownloadBuildArtifacts@0
+              inputs:
+                artifactName: 'dotnet-webapp'
+                downloadPath: '$(Pipeline.Workspace)'
 
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: pluralsightConnection
-              appType: 'webAppLinux'
-              appName: '$(appService)'
-              package: '$(Pipeline.Workspace)/dotnet-webapp/app.zip'
+            - task: AzureWebApp@1
+              inputs:
+                azureSubscription: pluralsightConnection
+                appType: 'webAppLinux'
+                appName: '$(appService)'
+                package: '$(Pipeline.Workspace)/dotnet-webapp/app.zip'
